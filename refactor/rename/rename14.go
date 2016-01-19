@@ -226,6 +226,9 @@ func Main(ctxt *build.Context, offsetFlag, fromFlag, to string) error {
 	if Diff {
 		defer func(saved func(string, []byte) error) { writeFile = saved }(writeFile)
 		writeFile = diff
+		if stdout == nil {
+			stdout = os.Stdout
+		}
 	}
 
 	var spec *spec
